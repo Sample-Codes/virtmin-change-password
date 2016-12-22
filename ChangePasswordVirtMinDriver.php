@@ -52,19 +52,19 @@ class ChangePasswordVirtMinDriver implements \RainLoop\Providers\ChangePassword\
 
 		try
 		{
-          	$this->log('Trying to change password for '.$oAccount->Email());
-          	$script = dirname(__FILE__)."/change-password-virtmin.sh";
-            $email = $oAccount->Email();
-          	$cmdline = "sudo $script $email $sPrevPassword $sNewPassword";
-          	$this->log('cmdline: '.$cmdline);
-	        $output = `${cmdline}`;
-          	$this->log('output is :'.$output);
+			$this->log('Trying to change password for '.$oAccount->Email());
+			$script = dirname(__FILE__)."/change-password-virtmin.sh";
+			$email = $oAccount->Email();
+			$cmdline = "sudo $script $email $sPrevPassword $sNewPassword";
+			$this->log("cmdline: $cmdline");
+			$output = `${cmdline}`;
+			$this->log("output is : .$output");
 			$bResult = (strpos($output, 'Old password: New password: Password changed', 0) === 0);
 		}
 		catch (\Exception $oException)
 		{
 			$bResult = false;
-          	$this->log("Exception: ".$e->getMessage());
+          	$this->log("Exception: ".$oException->getMessage());
 		}
 
 		return $bResult;
