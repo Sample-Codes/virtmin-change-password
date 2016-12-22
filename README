@@ -1,0 +1,20 @@
+Plugin that adds functionality to change the email account password using virtualmin command line.
+
+This involves some extra setup:
+
+1. edit sudoers file by 'sudo visudo' & add:
+    <USER> ALL = (root) NOPASSWD: <RAINLOOP-STORAGE>/_data_/_default_/plugins/virtmin-change-password/change-password-virtmin.sh
+    
+This gives non-interactive 'root' access to the script file `change-password-virtmin.sh`
+Make sure you replace <USER> with the username of the virtual server. 
+    eg if rainloop is running in 'webmail.domain.com', your username is probably something like: webmail_domain
+Make sure you locate your private <RAINLOOP-STORAGE> (It's this folder!)
+  	eg. /home/<USER>/private/owncloud/rainloop-storage/_data_/_default_/plugins/virtmin-change-password/change-password-virtmin.sh
+                                                      
+Save and exit visudo.
+
+2. Then, allow it to be executeable:
+
+    sudo chmod 750 change-password-virtmin.sh
+ 
+                                                                      
